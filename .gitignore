@@ -9,3 +9,5 @@ package.json
 !config/
 .rooignore
 !config/.rooignore
+!config/.roo/
+!config/.roo/brazil-workspace-guidelines.yml

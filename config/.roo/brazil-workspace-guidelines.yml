@@ -1,0 +1,173 @@
+# Brazil Workspace Essential Guide
+version: "1.0"
+description: "Core reference for working with Amazon Brazil workspaces"
+
+core_concepts:
+  package:
+    definition: "A collection of source code and resources that builds a deployable artifact"
+    models:
+    - name: "Classic Brazil"
+      config_file: "Config"
+      description: "Original model using custom syntax, supports multiple major versions"
+    - name: "Peru"
+      config_file: "brazil.ion"
+      description: "Newer model using Ion format, one major version per package"
+
+  workspace:
+    definition: "Local development environment containing packages for building and testing"
+    key_directories:
+    - src/: "Source code for packages"
+    - build/: "Build outputs"
+    - packageInfo: "Workspace metadata"
+
+configuration_files:
+  classic_brazil:
+    file: "Config"
+    essential_structure: |
+      package.MyPackageName = {
+        interfaces = (1.0);
+        build-system = brazilgradle;
+        dependencies = {
+          1.0 = {
+            DependencyName = 2.0;
+          };
+        };
+        test-dependencies = {
+          1.0 = {
+            TestFramework = 1.5;
+          };
+        };
+        targets = {
+          myTarget = { type = javalibrary; };
+        };
+      };
+
+  peru:
+    file: "brazil.ion"
+    essential_structure: |
+      'brazil_package_spec@1.0'
+      common::{
+        name: "MyPackageName",
+        major_version: "1",
+        build_system: {
+          name: "brazil_gradle"
+        },
+        dependencies: {
+          dependencies: [
+            {
+              name: "DependencyName",
+              major_version: "2"
+            }
+          ],
+          test_dependencies: [
+            {
+              name: "TestFramework",
+              major_version: "1"
+            }
+          ]
+        },
+        targets: {
+          "myTarget": {
+            type: "java_library"
+          }
+        }
+      }
+
+essential_commands:
+  workspace:
+  - command: "brazil ws create --root ~/workplace/my-workspace"
+    purpose: "Create workspace"
+  - command: "brazil ws use --versionset MyVersionSet"
+    purpose: "Set version set"
+  - command: "brazil ws use --package MyPackageName"
+    purpose: "Clone package into workspace"
+  - command: "brazil ws sync"
+    purpose: "Update workspace to latest version set revision"
+
+  build:
+  - command: "brazil-build"
+    purpose: "Build current package"
+  - command: "brazil-build test"
+    purpose: "Build and run tests"
+  - command: "brazil-build release"
+    purpose: "Build release artifacts"
+  - command: "brazil-build clean"
+    purpose: "Clean build artifacts"
+
+  testing:
+  - command: "brazil-test-exec --test-regex \"MyTest*\""
+    purpose: "Run specific tests"
+  - command: "brazil-build test --addopts=\"--pdb\""
+    purpose: "Debug failing tests (Python)"
+
+  dependencies:
+  - command: "brazil-path print"
+    purpose: "Print resolved dependencies"
+  - command: "brazil-path graph"
+    purpose: "View dependency graph"
+
+git_workflow:
+  basic_flow:
+  - step: "Create feature branch"
+    command: "git checkout -b feature/my-feature"
+  - step: "Make changes"
+    command: "edit files..."
+  - step: "Test locally"
+    command: "brazil-build test"
+  - step: "Commit changes"
+    command: "git add . && git commit -m \"Meaningful message\""
+  - step: "Create code review"
+    command: "git push origin feature/my-feature"
+  - step: "Submit dry run"
+    command: "brazil ws dryrun"
+
+important_environment_variables:
+- name: "BRAZIL_PLATFORM_OVERRIDE"
+  purpose: "Override the current platform (e.g., AL2_x86_64)"
+- name: "BRAZIL_PACKAGE_NAME"
+  purpose: "Name of the package being built"
+- name: "BRAZIL_PACKAGE_CHANGE_ID"
+  purpose: "Change ID for the current build (Package Builder)"
+- name: "BRAZIL_PACKAGE_VERSION"
+  purpose: "Complete version of package being built (Package Builder)"
+
+test_setup:
+  java:
+    framework: "JUnit"
+    structure:
+    - "src/main/java/": "Source code"
+    - "src/test/java/": "Test code"
+    - "src/test/resources/": "Test resources"
+    naming: "Classes should end with 'Test.java'"
+    execution: "brazil-build test"
+
+  python:
+    framework: "pytest"
+    structure:
+    - "src/package_name/": "Source code"
+    - "test/": "Test directory"
+    naming: "Files should start with 'test_'"
+    execution: "brazil-build test"
+
+common_issues:
+  platform_mismatch:
+    error: "Platform you are building for is not one of the platforms in the version set"
+    solution: "brazil ws use --platform [platform_name]"
+
+  dependency_conflicts:
+    error: "Conflicts between different versions of the same dependency"
+    solution: "Add to resolves-conflict-dependencies section (Config) or resolves_conflicts (brazil.ion)"
+
+  package_cache_issues:
+    error: "Package cache errors or slowness"
+    solution: "brazil-package-cache clean && brazil-package-cache restart"
+
+best_practices:
+- "Maintain backward compatibility where possible"
+- "Keep packages focused on specific functionality"
+- "Follow standard Git workflow (feature branches)"
+- "Run tests locally before submitting code"
+- "Use comprehensive commit messages"
+- "Keep workspace in sync with version set"
+- "Minimize direct dependencies"
+- "Document public APIs"

@@ -1,1 +1,7 @@
 !memory-bank/
+build/
+node_modules/
+logs
+.brazil
+.git
+release-info

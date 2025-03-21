@@ -1,221 +1,158 @@
-<div align="center">
+# RooFlow
 
-### By popular demand, ✨MCP server tools✨ have been added!
-
-<br>
-  
-### ☢️☢️☢️ Footgun in Use ☢️☢️☢️
-
-<br>
-
-# 🚀 RooFlow 🌊
-
-**Persistent Project Context and Streamlined AI-Assisted Development**
+A fork of [GreatScottyMac's RooFlow](https://github.com/GreatScottyMac/RooFlow) optimized for Amazon Brazil workspace environments and featuring improved setup processes.
 
 [![Roo Code](https://img.shields.io/badge/VS%20Code-Extension-blue.svg)](https://github.com/RooVetGit/Roo-Code)
-[![RooFlow](https://img.shields.io/badge/View%20on-GitHub-lightgrey.svg)](https://github.com/GreatScottyMac/RooFlow)
+[![RooFlow](https://img.shields.io/badge/View%20Original-GitHub-lightgrey.svg)](https://github.com/GreatScottyMac/RooFlow)
 
-</div>
+## 🔹 Key Enhancements
 
-## 🎯 Overview
+This fork builds on the excellent foundation of RooFlow with several key improvements:
 
-RooFlow enhances AI-assisted development in VS Code by providing **persistent project context** and **optimized mode interactions**, resulting in **reduced token consumption** and a more efficient workflow.  It builds upon the concepts of the Roo Code Memory Bank, but streamlines the process and introduces a more integrated system of modes. RooFlow ensures your AI assistant maintains a deep understanding of your project across sessions, even after interruptions.
+- **Brazil Workspace Integration**: Native support for Brazil 
+- **Simplified Setup Process**: Single script installation with both local and remote repository modes
+- **Workspace Detection**: Automatic identification of Brazil workspaces
 
-### Key Improvements over Roo Code Memory Bank:
+## 🔹 Installation
 
-*   **Reduced Token Consumption:** Optimized prompts and instructions minimize token usage.
-*   **Five Integrated Modes:**  Architect, Code, Test, Debug, and Ask modes work together seamlessly.
-*   **Simplified Setup:**  Easier installation and configuration.
-*   **Streamlined Real-time Updates:**  More efficient and targeted Memory Bank updates.
-*   **Clearer Instructions:**  Improved YAML-based rule files for better readability and maintainability.
+### One-Line Setup
 
-### Key Components
+The easiest way to install RooFlow in your environment is with this one-line command:
 
-```mermaid
-flowchart LR
-    A["RooFlow"] --> D["Toolkit"]
-    A["RooFlow"] --> M["Real-time Updates"]
-    D --> C["Mode Rules"]
-    B["Memory Bank"] --> E["Product Context"] & N["Active Context"] & F["Decisions"] & G["Progress"]
-    C --> H["Architect"] & I["Code"] & J["Ask"] & K["Debug"] & L["Test"]
-    M["Real-time Updates"] --> B
+```bash
+curl -s https://raw.githubusercontent.com/vinodismyname/RooFlow/refs/heads/main/config/setup-roo.sh | bash -s -- https://github.com/vinodismyname/RooFlow.git
 ```
 
-- 🧠 **Memory Bank**: Persistent storage for project knowledge (automatically managed).
-- 💻 **System Prompts**: YAML-based core instructions for each mode (`.roo/system-prompt-[mode]`).
-- 🔧 **VS Code Integration**: Seamless development experience within VS Code.
-- ⚡ **Real-time Updates**:  Automatic Memory Bank updates triggered by significant events.
+### Creating an Alias
 
-## 🚀 Quick Start
+For even easier access, you can create an alias in your shell configuration:
 
-   ###  1. Installation
-
-   1.  **Install Roo Code Extension:** Ensure you have the Roo Code extension installed in VS Code.
-   2.  **Download [RooFlow Files:](https://github.com/GreatScottyMac/RooFlow/tree/main/config)** Download the following files from this repository:
-   * [`system-prompt-architect`](https://github.com/GreatScottyMac/RooFlow/blob/main/config/.roo/system-prompt-architect)
-   * [`system-prompt-ask`](https://github.com/GreatScottyMac/RooFlow/blob/main/config/.roo/system-prompt-ask)
-   * [`system-prompt-code`](https://github.com/GreatScottyMac/RooFlow/blob/main/config/.roo/system-prompt-code)
-   * [`system-prompt-debug`](https://github.com/GreatScottyMac/RooFlow/blob/main/config/.roo/system-prompt-debug) 
-   * [`system-prompt-test`](https://github.com/GreatScottyMac/RooFlow/blob/main/config/system-prompt-test)
-   * [`.rooignore`](https://github.com/GreatScottyMac/RooFlow/blob/main/config/.rooignore)
-   * [`.roomodes`](https://github.com/GreatScottyMac/RooFlow/blob/main/config/.roo/system-prompt-test)
-   * [`insert-variables.cmd`](https://github.com/GreatScottyMac/RooFlow/blob/main/config/insert-variables.cmd)For Windows OS
-   * [`insert-variables.sh`](https://github.com/GreatScottyMac/RooFlow/blob/main/config/insert-variables.sh)For Unix/Linux/macOS
-   3.  **Place Files in Project:**
-   *   Create a directory named `.roo` in your project's root directory.
-   *   Place the `system-prompt-[mode]` files inside the `.roo` directory.
-   * Place the [`.rooignore`](https://github.com/GreatScottyMac/RooFlow/blob/main/config/.rooignore) file in the project's root directory. (Or add !memory-bank/ to your existing .rooignore file)
-   * Place the [`.roomodes`](https://github.com/GreatScottyMac/RooFlow/blob/main/config/.roomodes) file in the project's root directory (Or add its contents to your existing .roomodes file)
-   * Place the appropriate `insert-variables.[sh/cmd]` script for your platform in the project's root directory.
-
-   Your project structure should look like this:
-
-   ```
-   project-root
-    ├── .roo
-    |    ├── system-prompt-architect
-    |    ├── system-prompt-ask
-    |    ├── system-prompt-code
-    |    ├── system-prompt-debug
-    |    └── system-prompt-test
-    ├── memory-bank (This directory will be created automatically by Roo after your first prompt)
-    |    ├── activeContext.md
-    |    ├── decisionLog.md
-    |    ├── productContext.md
-    |    ├── progress.md
-    |    └── systemPatterns.md
-    ├── .rooignore               
-    ├── .roomodes
-    └──insert-variables.[sh/cmd]
+```bash
+# Add to your ~/.bashrc, ~/.zshrc, or equivalent:
+alias setup-rooflow='curl -s https://raw.githubusercontent.com/vinodismyname/RooFlow/refs/heads/main/config/setup-roo.sh | bash -s -- https://github.com/vinodismyname/RooFlow.git'
 ```
-   4. **Run insert-variables script**
 
-   #### For Windows: 
-   1. Open Command Prompt or PowerShell
-   2. Navigate to your project:
-      ```cmd
-      cd path\to\your\project
-      ```
-   3. Run the script:
+After adding this alias and reloading your shell configuration (`source ~/.bashrc` or `source ~/.zshrc`), you can simply run:
 
-      From Command Prompt:
+```bash
+setup-rooflow
+```
 
-      ```cmd
-      insert-variables.cmd
-      ```
+### Manual Setup Options
 
-      From Powershell:
+If you prefer more control, you can also:
 
-      ```powershell
-      .\insert-variables.cmd
-      ```
-      Troubleshooting (Windows)
-   * **If you get "access denied" or execution policy errors:**
-   1. Open PowerShell as Administrator
-   2. Run this command once:
-      ```powershell
-      Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
-      ```
-   3. Close Administrator PowerShell
-   4. Try running the script again from your project directory
-   * **If you see "Error: .roo directory not found", verify your directory structure.**
-   * **If using PowerShell 7+, run as:**
-      ```powershell
-      cmd /c insert-variables.cmd
-      ```
-   #### For Unix/Linux/macOS
-   1. Open Terminal
-   2. Navigate to your project:
-      ```bash
-      cd path/to/your/project
-      ```
-   3. Make the script executable:
-      ```bash
-      sudo chmod +x insert-variables.sh
-      ```
-   4. Run the script:
-      ```bash
-      ./insert-variables.sh
-      ```
+1. Download the setup script:
+```bash
+curl -o setup-roo.sh https://raw.githubusercontent.com/vinodismyname/RooFlow/refs/heads/main/config/setup-roo.sh
+chmod +x setup-roo.sh
+```
 
-      Troubleshooting (Unix/Linux/macOS)
-   * **If you see "Permission denied", run:** 
-      ```bash
-      sudo chmod +x insert-variables.sh
-      ```
-   * **If you see "Error: .roo directory not found", verify your directory structure**
+2. Run with options:
+```bash
+# Local mode (using local files)
+./setup-roo.sh
 
-    
-   #### Expected Output
-   The script will:
-   1. Detect your system configuration
-   2. Process each system prompt file
-   3. Show "Processing" and "Completed" messages for each file
-   4. Display "Done" when finished
+# Remote mode (clone from repository)
+./setup-roo.sh https://github.com/vinodismyname/RooFlow.git
+
+# Force override existing settings
+./setup-roo.sh https://github.com/vinodismyname/RooFlow.git --override
+```
+
+### Setup Options
+
+- `--override`: Force overwrite of existing .roo directory
+- `--help`: Show usage information
+
+## 🔹 Amazon Brazil Integration
+
+This fork adds specialized features for Amazon internal development environments:
+
+### Brazil Workspace Guidelines
+
+A  YAML reference is included that provides Roo Code with extensive knowledge about:
+
+- Brazil package structure and configuration
+- Essential Brazil commands for workspace management
+- Build system configuration
+- Testing frameworks
+- Common issues and solutions
+
+This allows Roo Code to provide better assistance when working in Amazon Brazil environments.
+
+### Automatic Workspace Context
+
+When operating inside a Brazil workspace, system prompts are automatically populated with:
+
+- Brazil workspace root location
+- Available packages in the workspace
+- Build system configuration
+- Reference to the included guidelines
+
+## 🔹 System Configuration
+
+The enhanced system prompt configuration is more flexible and adapts to your environment:
+
+```yaml
+system_information:
+  os: "macOS 14.4.1"
+  shell: "bash"
+  home_directory: "/Users/username"
+  working_directory:
+    # Brazil workspace specific information when detected
+    workspace_guidelines: "/path/to/brazil-workspace-guidelines.yml"
+    brazil_workspace_root: "/path/to/workspace"
+    brazil_workspace_packages:
+      package1: "/path/to/workspace/src/package1"
+      package2: "/path/to/workspace/src/package2"
+  initial_context: "Recursive file list in working directory provided in environment_details"
+```
+
+## 🔹 Directory Structure
+
+Your project structure will look like this after setup:
+
+```
+project-root/
+├── .roo/
+│    ├── system-prompt-architect
+│    ├── system-prompt-ask
+│    ├── system-prompt-code
+│    ├── system-prompt-debug
+│    ├── system-prompt-test
+│    └── brazil-workspace-guidelines.yml (if in Brazil workspace)
+├── .clinerules-architect
+├── .clinerules-code
+├── .clinerules-ask
+├── .clinerules-debug
+├── .clinerules-test
+├── .rooignore
+├── .roomodes
+├── memory-bank/ (created automatically)
+│    ├── activeContext.md
+│    ├── decisionLog.md
+│    ├── productContext.md
+│    ├── progress.md
+│    └── systemPatterns.md
+└── projectBrief.md (optional)
+```
+
+## 🔹 Basic Usage
+
+The core functionality remains consistent with the original RooFlow. For detailed information on the Memory Bank system and its features, please refer to the [original RooFlow repository](https://github.com/GreatScottyMac/RooFlow).
+
+### Brazil-Specific Commands
+
+When working in a Brazil workspace, Roo Code will have access to key Brazil commands and can help with:
+
+- Creating and managing Brazil workspaces
+- Building packages with various options
+- Resolving dependency conflicts
+- Executing tests with specific configurations
+- Navigating package structures
 
 
-   #### Variables Being Replaced
-   The script replaces these placeholders with your system-specific values:
-   - OS_PLACEHOLDER (e.g., "Windows 10 Pro" or "Ubuntu 22.04")
-   - SHELL_PLACEHOLDER (e.g., "cmd" or "bash")
-   - HOME_PLACEHOLDER (your home directory)
-   - WORKSPACE_PLACEHOLDER (your project directory)
-   - GLOBAL_SETTINGS_PLACEHOLDER (Roo Code global settings path)
-   - MCP_LOCATION_PLACEHOLDER (Roo Code MCP directory path)
-   - MCP_SETTINGS_PLACEHOLDER (Roo Code MCP settings path)
+## 🔹 Acknowledgements
 
-   #### Next Steps
-   After running the script:
-   1. Verify that `.roo/system-prompt-*` files contain your system paths
-   2. Start using VS Code with the Roo Code extension
-   3. The Memory Bank will be initialized on first use
-
-   ### 2. Using RooFlow
-
-   1.  **Start a Chat:** Open a new Roo Code chat in your project.
-   2.  **Select a Mode:** Choose the appropriate mode (Architect, Code, Test, Debug, Ask) for your task.
-   3.  **Interact with Roo:**  Give Roo instructions and ask questions. Roo will automatically use the Memory Bank to maintain context.
-   4.  **Memory Bank Initialization:**  If you start a chat in a project *without* a `memory-bank/` directory, Roo will suggest switching to Architect mode and guide you through the initialization process.
-   5. **"Update Memory Bank" Command:** At any time, you can type "Update Memory Bank" or "UMB" to force a synchronization of the chat session's information into the Memory Bank. This is useful for ensuring continuity across sessions or before switching modes.
-
-## 📚 Memory Bank Structure
-
-The Memory Bank is a directory named `memory-bank` located in your project's root. It contains several Markdown files that store different aspects of your project's knowledge:
-
-| File                 | Purpose                                                                                                                               |
-| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| `activeContext.md`   | Tracks the current session's context: recent changes, current goals, and open questions/issues.                                       |
-| `decisionLog.md`     | Records architectural and implementation decisions, including the context, decision, rationale, and implementation details.        |
-| `productContext.md`  | Provides a high-level overview of the project, including its goals, features, and overall architecture.                             |
-| `progress.md`        | Tracks the progress of the project, including completed work, current tasks, and next steps.  Uses a task list format.               |
-| `systemPatterns.md` | (Optional) Documents recurring patterns and standards used in the project (coding patterns, architectural patterns, testing patterns). |
-
-RooFlow automatically manages these files. You generally don't need to edit them directly, although you can review them to understand the AI's knowledge.
-
-## ✨ Features
-
-### 🧠 Persistent Context
-
-RooFlow remembers project details across sessions, maintaining a consistent understanding of your codebase, design decisions, and progress.
-
-### ⚡ Real-time Updates
-
-The Memory Bank is updated automatically based on significant events within each mode, ensuring that the context is always up-to-date.
-
-### 🤝 Mode Collaboration
-
-The five modes (Architect, Code, Test, Debug, Ask) are designed to work together seamlessly.  They can switch between each other as needed, and they share information through the Memory Bank.
-
-### ⬇️ Reduced Token Consumption
-
-RooFlow is designed to use fewer tokens than previous systems, making it more efficient and cost-effective.
-
-## 📝 UMB Command
-The command "Update Memory Bank" or "UMB" can be given at any time to update the memory bank with information from the current chat session.
-
-## Contributing
-
-Contributions to RooFlow are welcome! Please see the [CONTRIBUTING.md](CONTRIBUTING.md) file (you'll need to create this) for guidelines.
-
-## License
-  [Apache 2.0](LICENSE)
+This project is a fork of [GreatScottyMac's RooFlow](https://github.com/GreatScottyMac/RooFlow), which provides the core Memory Bank system and AI-assisted development framework. The enhancements in this fork focus on Amazon Brazil workspace integration and improved setup processes.

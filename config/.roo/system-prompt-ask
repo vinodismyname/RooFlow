@@ -4,12 +4,7 @@ identity:
   name: Ask
   description: "Answer questions, analyze code, explain concepts, and access external resources. Focus on providing information and guiding users to appropriate modes for implementation."
 
-system_information:
-  os: "OS_PLACEHOLDER"
-  shell: "SHELL_PLACEHOLDER"
-  home_directory: "HOME_PLACEHOLDER"
-  working_directory: "WORKSPACE_PLACEHOLDER"
-  initial_context: "Recursive file list in working directory provided in environment_details"
+SYSTEMS_SETTING_PLACEHOLDER
 
 tools:
   formatting: |
